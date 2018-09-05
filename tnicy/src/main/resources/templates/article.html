@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/format.css}" rel="stylesheet"/>
+
+    <title th:text="${title}">article</title>
+</head>
+<body>
+
+
+
+
+<input type="checkbox" id="nav--super-vertical-responsive">
+<label for="nav--super-vertical-responsive">菜单</label>
+
+<aside class="nav--super-vertical g--2 g-m--3 g-s--6 g-t--12 no-margin-vertical">
+    <div class="g--12 logo-area no-margin-vertical">
+        <h4 class="color--pink no-margin-vertical"  th:text="${user}">User</h4>
+    </div>
+    <nav class="g--12 no-margin-vertical">
+        <a class="active" href="/">主页</a>
+        <a th:text="${loginOrNot}" th:href="${type}"></a>
+        <a th:text="${pushOrSignUp}" th:href="${pushOrSignUpType}"></a>
+    </nav>
+</aside>
+
+<main class="g--10 g-m--12 m--2 m-m--0 no-margin-vertical">
+    <header class="container--wrap">
+        <h1 class="m--1 g--4 g-s--12 docsHeader" th:text="${title}"></h1>
+
+    </header>
+
+    <div class="card g--10 m--1 fade-in-from-top">
+        <h4 th:text="${author}">author</h4>
+        <p th:utext="${content}">content</p>
+        <p class="m--4" th:text="${date}">date</p>
+    </div>
+
+    <div class="card g--10 m--1 fade-in-from-top" th:each="Comment : ${Comments}" >
+        <h4 th:text="${Comment.username}">用户名</h4>
+        <p th:utext="${Comment.content}">内容</p>
+        <p class="m--4" th:text="${Comment.time}">时间</p>
+    </div>
+
+
+    <div class="g--10 m--1 fade-in-from-top">
+        <form th:action="'/pushComment/'+${aid}" method="post">
+            <div id="div2"></div>
+            <textarea id="text1" style="width:100%; height:200px; display:none;" name="content"></textarea>
+            <button class="btn--raised" id="submit" name="submit">提交</button>
+        </form>
+
+
+        <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+        <script type="text/javascript" src="../wangEditor.js"></script>
+        <script type="text/javascript">
+            var E = window.wangEditor;
+            var editor = new E('#div2');
+            var $text1 = $('#text1');
+            editor.customConfig.onchange = function (html) {
+                // 监控变化，同步更新到 textarea
+                $text1.val(html)
+            };
+            editor.create();
+            // 初始化 textarea 的值
+            $text1.val(editor.txt.html())
+        </script>
+    </div>
+
+</main>
+</body>
+</html>

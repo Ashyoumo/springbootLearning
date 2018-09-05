@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/format.css}" rel="stylesheet"/>
+    <title>index</title>
+
+    <!--<script th:inline="javascript">
+         var name = [[${user}]];
+         console.log(name);
+
+         function start() {
+             console.log(document.getElementById("SP"));
+             document.getElementById("SP").innerHTML="<p>"+name+"</p>";
+
+         }
+    </script>-->
+
+</head>
+<body>
+
+
+
+<input type="checkbox" id="nav--super-vertical-responsive">
+<label for="nav--super-vertical-responsive">菜单</label>
+
+<aside class="nav--super-vertical g--2 g-m--3 g-s--6 g-t--12 no-margin-vertical">
+    <div class="g--12 logo-area no-margin-vertical">
+        <h4 class="color--pink no-margin-vertical"  th:text="${user}">User</h4>
+    </div>
+    <nav class="g--12 no-margin-vertical">
+        <a class="active" href="/">主页</a>
+        <a th:text="${loginOrNot}" th:href="${type}"></a>
+        <a th:text="${pushOrSignUp}" th:href="${pushOrSignUpType}"></a>
+    </nav>
+</aside>
+
+<main class="g--10 g-m--12 m--2 m-m--0 no-margin-vertical">
+
+    <header class="container--wrap">
+        <h1 class="m--1 g--4 g-s--12 docsHeader"> 帖子 </h1>
+
+    </header>
+
+
+    <table class="g--10 m--1 fade-in-from-top">
+        <tr>
+            <th>标题</th>
+            <th>作者</th>
+            <th>日期</th>
+        </tr>
+        <tr style="text-align: center" th:each="Article : ${Articles}" th:onclick="'window.open(\'/article/'+${Article.aid}+'\',\'_self\')'">
+            <td th:text="${Article.title}">标题</td>
+            <td th:text="${Article.username}">用户</td>
+            <td th:text="${Article.date}">日期</td>
+        </tr>
+    </table>
+
+
+
+</main>
+
+</body>
+</html>

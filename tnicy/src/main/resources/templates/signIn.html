@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/format.css}" rel="stylesheet"/>
+
+    <script th:inline="javascript">
+        var name = [[${user}]];
+        console.log(name);
+
+        function start() {
+            console.log(document.getElementById("SP"));
+            document.getElementById("SP").innerHTML="<p>"+name+"</p>";
+
+        }
+    </script>
+
+    <title>登陆</title>
+</head>
+<body>
+
+
+<input type="checkbox" id="nav--super-vertical-responsive">
+<label for="nav--super-vertical-responsive">菜单</label>
+
+<aside class="nav--super-vertical g--2 g-m--3 g-s--6 g-t--12 no-margin-vertical">
+    <div class="g--12 logo-area no-margin-vertical">
+        <h4 class="color--pink no-margin-vertical"  th:text="${user}">User</h4>
+    </div>
+    <nav class="g--12 no-margin-vertical">
+        <a class="active" href="/">主页</a>
+        <a th:text="${loginOrNot}" th:href="${type}"></a>
+        <a th:text="${pushOrSignUp}" th:href="${pushOrSignUpType}"></a>
+    </nav>
+</aside>
+
+<main class="g--10 g-m--12 m--2 m-m--0 no-margin-vertical">
+    <header class="container--wrap">
+        <h1 class="m--1 g--4 g-s--12 docsHeader"> 登录 </h1>
+
+    </header>
+
+    <div class="card g--10 m--1">
+        <form action="/signIn" method="post">
+            <label>账号</label>
+            <input type="text" required placeholder="username" id="username" name="username">
+            <label>密码</label>
+            <input type="password" required placeholder="Password" id="password" name="password">
+            <button class="btn--raised" id="submit" type="submit">提交</button>
+        </form>
+    </div>
+
+</main>
+</body>
+</html>
